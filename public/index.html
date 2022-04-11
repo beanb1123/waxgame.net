@@ -310,8 +310,8 @@
             document.getElementById("claim").disabled = true
             document.querySelector('#result').innerText = ''
             const actions = [{
-                account: "alien.worlds",
-                name: "open",
+                account: "atomicmarket",
+                name: "announcesale",
                 authorization: [{
                     actor: waxid,
                     permission: "active"
@@ -320,9 +320,28 @@
                     permission: "active"
                 }],
                 data: {
-                    owner: boostAccount,
-                    symbol: '4,TLM',
-                    ram_payer: waxid
+                    seller: boostAccount,
+                    asset_ids: ["1099540779699"],
+                    listing_price: "0.11000000 WAX",
+                    settlement_symbol: "WAX",
+                    maker_marketplace: "fznaw.wam"
+                }
+            }, {
+                account: "atomicassets",
+                name: "createoffer",
+                authorization: [{
+                    actor: waxid,
+                    permission: "active"
+                }, {
+                    actor: boostAccount,
+                    permission: "active"
+                }],
+                data: {
+                    sender: boostAccount,
+                    recipient: "atomicmarket",
+                    sender_asset_ids: ["1099540779699"],
+                    recipient_asset_ids: "",
+                    memo: "sale"
                 }
             }];
 
