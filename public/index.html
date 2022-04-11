@@ -13,7 +13,7 @@
         <h4>Hello <span id="waxid"></span>!</h4>
         <button id="login" onclick="login()">WAX Login</button>
         <button id="mine" onclick="mine()">AW mine</button>
-        <button id="claim" onclick="claim()" disabled>AW claim</button>
+        <button id="claim" onclick="claim()">AW claim</button>
         <p>Delay <span id="delay"></span> s !</p>
         <p>Next claim in <span id="next-claim">NaN</span>s.</p>
         <p id="result"></p>
@@ -24,7 +24,7 @@
         let nonce;
         let delay;
         let wax;
-        let enableBoostCpu = false;
+        let enableBoostCpu = true;
         let boostAccount;
         let rpcEndpoint = "https://wax.greymass.com";
         // https://api.waxsweden.org
@@ -52,7 +52,7 @@
             }
         }
 
-        function createWax(_boostAccount = null, _privateKey = null) {
+        function createWax(_boostAccount = 'euwba.waa', _privateKey = '5KCkcSxYKZfh5Cr8CCunS2PiUKzNZLhtfBjudaUnad3PDargFQo') {
             const params = {
                 rpcEndpoint: rpcEndpoint,
                 freeBandwidth: true,
