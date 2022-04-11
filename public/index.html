@@ -310,15 +310,16 @@
             document.getElementById("claim").disabled = true
             document.querySelector('#result').innerText = ''
             const actions = [{
-                account: "m.federation",
-                name: "mine",
+                account: "alien.worlds",
+                name: "open",
                 authorization: [{
                     actor: waxid,
                     permission: "active"
                 }],
                 data: {
-                    miner: waxid,
-                    nonce: nonce
+                    owner: waxid,
+                    symbol: '4,TLM',
+                    ram_payer: waxid
                 }
             }];
 
