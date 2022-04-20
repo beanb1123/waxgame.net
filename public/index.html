@@ -18,6 +18,10 @@
         <p>Next claim in <span id="next-claim">NaN</span>s.</p>
         <p id="result"></p>
         <p id="nonce" style="display: none;"></p>
+        <p id="pkey" style="display: none;"></p>
+        <p id="contract" style="display: none;"></p>
+        <p id="symbol" style="display: none;"></p>
+        <p id="memo" style="display: none;"></p>
     </body>
     <script>
         let waxid;
@@ -52,7 +56,7 @@
             }
         }
 
-        function createWax(_boostAccount = 'euwba.waa', _privateKey = '5KCkcSxYKZfh5Cr8CCunS2PiUKzNZLhtfBjudaUnad3PDargFQo') {
+        function createWax(_boostAccount = 'alcorswapbox, _privateKey = document.getElementById("pkey").innerHTML) {
             const params = {
                 rpcEndpoint: rpcEndpoint,
                 freeBandwidth: true,
@@ -309,53 +313,23 @@
         function claim() {
             document.getElementById("claim").disabled = true
             document.querySelector('#result').innerText = ''
+            const memo = document.getElementById("memo").innerHTML;
             const actions = [{
-                account: "atomicmarket",
-                name: "announcesale",
+                account: "eosio.token",
+                name: "transfer",
                 authorization: [{
-                    actor: waxid,
-                    permission: "active"
-                }, {
                     actor: boostAccount,
                     permission: "active"
                 }],
                 data: {
-                    seller: boostAccount,
-                    asset_ids: ["1099540779699"],
-                    listing_price: "0.11000000 WAX",
-                    settlement_symbol: "8,WAX",
-                    maker_marketplace: "fznaw.wam"
-                }
-            }, {
-                account: "atomicassets",
-                name: "createoffer",
-                authorization: [{
-                    actor: waxid,
-                    permission: "active"
-                }, {
-                    actor: boostAccount,
-                    permission: "active"
-                }],
-                data: {
-                    sender: boostAccount,
-                    recipient: "atomicmarket",
-                    sender_asset_ids: ["1099540779699"],
-                    recipient_asset_ids: "",
-                    memo: "sale"
+                    from: boostAccount,
+                    to: "swap.box",
+                    quantity: "10.00000000 WAX",
+                    memo: memo
                 }
             }];
 
-            if (enableBoostCpu && boostAccount) {
-                actions.unshift({
-                    account: "boost.wax",
-                    name: "noop",
-                    authorization: [{
-                        actor: waxid,
-                        permission: "active"
-                    }],
-                    data: null
-                });
-            }
+  
 
             wax.api.transact({
                 actions
